@@ -8,9 +8,10 @@ function ShoppingList({ items, setItems }) {
   const [search, setSearch] = useState("")
 
   function handleCategoryChange(event) {
-    setSelectedCategory(event.target.value);
+    setSelectedCategory(event);
   }
 
+  // new search function invoked onChange and passed to Filter
   function handleSearchChange(event){
     setSearch(event)
   }
@@ -21,7 +22,7 @@ function ShoppingList({ items, setItems }) {
   // search using includes() method better UX
   const itemsToDisplay = items.filter((item) => {
     const categoryMatch = selectedCategory === "All" || item.category === selectedCategory;
-    const searchMatch = search === "" || item.name.includes(search);
+    const searchMatch = search === "" || item.name.toLowerCase().includes(search);
   
     return categoryMatch && searchMatch;
   });
